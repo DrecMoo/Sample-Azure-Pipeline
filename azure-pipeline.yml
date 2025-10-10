@@ -1,0 +1,50 @@
+trigger:
+- main
+
+# Replace 'NixosPool' with the name of the Agent Pool you registered your NixOS machine to.
+pool:
+  name: NixosPool
+  # Optional: You can target a specific agent capability if needed, e.g., 'nixos'
+  # demands:
+  # - agent.name -equals YourAgentName
+
+variables:
+  nodeScript: 'index.js'
+
+steps:
+- task: UseNode@1
+  displayName: 'Install Node.js'
+  inputs:
+    # Use the desired Node.js version
+    version: '20.x' 
+
+- script: |
+    echo "Current working directory: $(System.DefaultWorkingDirectory)"
+    node $(nodeScript)
+  displayName: 'Run Simple Node.js Program'
+  env:
+    # Set an environment variable as a simple test
+    PIPELINE_ENV_TEST: 'Success'
+
+- script: |
+    if grep -q "Node.js Version" $(Agent.BuildDirectory)/s/output.txt; then
+      echo "##vso[task.setvariable variable=NodeRunStatus]SUCCESS"
+      echo "Node script execution confirmed."
+    else
+      echo "##vso[task.setvariable variable=NodeRunStatus]FAILURE"
+      echo "Node script execution FAILED to find expected output."
+      exit 1
+    fi
+  displayName: 'Check Script Output'
+  # Save the output of the previous step for checking
+  inputs:
+    workingDirectory: '$(System.DefaultWorkingDirectory)'
+    targetType: 'bash'
+    script: 'node $(nodeScript) > output.txt'
+
+- script: |
+    echo "Node Run Status is: $(NodeRunStatus)"
+    if [ "$(NodeRunStatus)" != "SUCCESS" ]; then
+        exit 1
+    fi
+  displayName: 'Final Status Check'
