@@ -3,10 +3,10 @@ trigger:
 
 # Replace 'NixosPool' with the name of the Agent Pool you registered your NixOS machine to.
 pool:
-  name: NixosPool
+  name: nixos-testing
   # Optional: You can target a specific agent capability if needed, e.g., 'nixos'
-  # demands:
-  # - agent.name -equals YourAgentName
+  demands:
+  - agent.name -equals azure-devops-agent
 
 variables:
   nodeScript: 'index.js'
