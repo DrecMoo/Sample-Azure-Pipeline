@@ -175,24 +175,7 @@
       Type = "simple";
       User = "azureagent";
       WorkingDirectory = "/home/azureagent/azagent";
-      ExecStart = "${pkgs.buildFHSEnv {
-        name = "azure-agent-env";
-        targetPkgs = pkgs: with pkgs; [
-          bash
-          coreutils
-          glibc
-          icu
-          krb5
-          lttng-ust
-          openssl
-          zlib
-          curl
-          git
-          dotnet-sdk_8
-          nodejs_20
-        ];
-        runScript = "bash";
-      }}/bin/azure-agent-env -c '/home/azureagent/azagent/run.sh'";
+      ExecStart = "/home/azureagent/azagent/run.sh";
       Restart = "always";
       RestartSec = "10s";
       NoNewPrivileges = false;
