@@ -32,6 +32,23 @@
     extraGroups = [ "wheel" "docker" ];
   };
 
+  #Security rules to enable rebuilds via DevOps pipeline
+  security.sudo.extraRules = [
+    {
+      users = [ "azureagent" ];
+      commands = [
+        {
+          command = "/run/current-system/sw/bin/nixos-rebuild";
+          options = [ "NOPASSWD" ];
+        }
+        {
+          command = "/run/current-system/sw/bin/cp";
+          options = [ "NOPASSWD" ];
+        }
+      ];    
+    }
+  ];
+
   # Networking
   networking.hostName = "azure-devops-agent";
   networking.networkmanager.enable = true;
@@ -159,9 +176,10 @@
           nodejs_20
         ];
         runScript = "bash";
-      }}/bin/azure-agent-env -c '/home/azureagent/azagent/runsvc.sh'";
+      }}/bin/azure-agent-env -c '/home/azureagent/azagent/run.sh'";
       Restart = "always";
       RestartSec = "10s";
+      NoNewPrivileges = false;
     };
   };
 
