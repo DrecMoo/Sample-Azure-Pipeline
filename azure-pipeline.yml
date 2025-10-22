@@ -1,10 +1,9 @@
 trigger:
 - main
 
-# Replace 'NixosPool' with the name of the Agent Pool you registered your NixOS machine to.
+# Replace 'Test Nix' with the name of the Agent Pool in Azure DevOps.
 pool:
   name: 'Test Nix'
-  # Optional: You can target a specific agent capability if needed, e.g., 'nixos'
   demands:
   - agent.name -equals nix-test-vm
 
@@ -43,3 +42,12 @@ steps:
         exit 1
     fi
   displayName: 'Final Status Check'
+
+- script: |
+    sudo cp config.nix /etc/nixos/configuration.nix
+    echo "Copied config.nix to /etc/nixos/configuration.nix"
+  displayName: 'Copy NixOS Configuration'
+
+- script: |
+    sudo nixos-rebuild switch
+  displayName: 'Apply NixOS Configuration'
