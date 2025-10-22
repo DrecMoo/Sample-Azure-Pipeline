@@ -54,6 +54,9 @@
   # Service to apply configuration from pipeline
   systemd.services.nixos-apply-config = {
     description = "Apply NixOS Configuration from Pipeline";
+    environment = {
+      NIX_PATH = "nixpkgs=/nix/var/nix/profiles/per-user/root/channels/nixos:nixos-config=/etc/nixos/configuration.nix";
+    };
     serviceConfig = {
       Type = "oneshot";
       ExecStart = "${pkgs.writeShellScript "apply-config" ''
