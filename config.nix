@@ -45,12 +45,6 @@
     }
   ];
 
-  systemd.services."azuredevops-agent.service" = {
-    serviceConfig = {
-      NoNewPrivileges = false;
-    };
-  };
-
   # Service to apply configuration from pipeline
   systemd.services.nixos-apply-config = {
     description = "Apply NixOS Configuration from Pipeline";
@@ -177,6 +171,7 @@
       Type = "simple";
       User = "azureagent";
       WorkingDirectory = "/home/azureagent/azagent";
+      NoNewPrivileges = false;
       ExecStart = "${pkgs.buildFHSEnv {
         name = "azure-agent-env";
         targetPkgs = pkgs: with pkgs; [
