@@ -44,6 +44,10 @@ steps:
   displayName: 'Final Status Check'
 
 - script: |
+    cat /proc/self/status | grep NoNewPrivs
+  displayName: 'Check NoNewPrivileges Status'
+
+- script: |
     sudo cp config.nix /etc/nixos/configuration.nix
     echo "Copied config.nix to /etc/nixos/configuration.nix"
   displayName: 'Copy NixOS Configuration'
