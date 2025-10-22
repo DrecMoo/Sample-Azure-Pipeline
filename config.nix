@@ -38,14 +38,10 @@
       users = [ "azureagent" ];
       commands = [
         {
-          command = "/run/current-system/sw/bin/nixos-rebuild";
+          command = "/run/current-system/sw/bin/systemctl";
           options = [ "NOPASSWD" ];
         }
-        {
-          command = "/run/current-system/sw/bin/cp";
-          options = [ "NOPASSWD" ];
-        }
-      ];    
+      ];
     }
   ];
 
@@ -55,14 +51,14 @@
     };
   };
 
-#service to apply configuration from pipeline
-   systemd.services.nixos-apply-config = {
+  # Service to apply configuration from pipeline
+  systemd.services.nixos-apply-config = {
     description = "Apply NixOS Configuration from Pipeline";
     serviceConfig = {
       Type = "oneshot";
       ExecStart = "${pkgs.writeShellScript "apply-config" ''
-        cp /home/azureagent/azagent/_work/1/s/config.nix /etc/nixos/configuration.nix
-        nixos-rebuild switch
+        ${pkgs.coreutils}/bin/cp /home/azureagent/azagent/_work/1/s/config.nix /etc/nixos/configuration.nix
+        ${config.system.build.nixos-rebuild}/bin/nixos-rebuild switch
       ''}";
     };
   };
