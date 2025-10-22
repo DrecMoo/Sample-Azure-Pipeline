@@ -41,6 +41,10 @@
           command = "/run/current-system/sw/bin/systemctl";
           options = [ "NOPASSWD" ];
         }
+        {
+          command = "/bin/cp";
+          options = [ "NOPASSWD" ];
+        }
       ];
     }
   ];

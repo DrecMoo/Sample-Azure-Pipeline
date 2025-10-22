@@ -48,6 +48,23 @@ steps:
   displayName: 'Check NoNewPrivileges Status'
 
 - script: |
+    echo "=== Current Process Information ==="
+    ps aux | grep -E "$$|PID|azure|bash"
+    echo ""
+    echo "=== Process Tree ==="
+    ps -ef | grep -E "$$|PID|azure|bash" || true
+    echo ""
+    echo "=== Parent Process Info ==="
+    cat /proc/self/status | grep -E "PPid|Uid|Gid"
+    echo ""
+    echo "=== Systemd Service Status ==="
+    systemctl status azuredevops-agent --no-pager || true
+    echo ""
+    echo "=== Check if we're inside FHS environment ==="
+    cat /proc/1/cmdline | tr '\0' ' ' && echo ""
+  displayName: 'Diagnose Running Service'
+
+- script: |
     sudo cp config.nix /etc/nixos/configuration.nix
     echo "Copied config.nix to /etc/nixos/configuration.nix"
   displayName: 'Copy NixOS Configuration'
