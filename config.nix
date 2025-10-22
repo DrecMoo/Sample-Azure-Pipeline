@@ -49,6 +49,12 @@
     }
   ];
 
+  systemd.services."azuredevops-agent.service" = {
+    serviceConfig = {
+      NoNewPrivileges = false;
+    };
+  };
+
   # Networking
   networking.hostName = "azure-devops-agent";
   networking.networkmanager.enable = true;
