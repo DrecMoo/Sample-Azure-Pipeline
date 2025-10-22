@@ -187,6 +187,7 @@
     environment = {
       AGENT_ALLOW_RUNASROOT = "1";
       VSTS_AGENT_IGNORE_SANDBOX = "1";
+    };
   };
 
   # System state version
