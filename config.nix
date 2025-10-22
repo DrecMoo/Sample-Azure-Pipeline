@@ -171,7 +171,6 @@
       Type = "simple";
       User = "azureagent";
       WorkingDirectory = "/home/azureagent/azagent";
-      NoNewPrivileges = false;
       ExecStart = "${pkgs.buildFHSEnv {
         name = "azure-agent-env";
         targetPkgs = pkgs: with pkgs; [
