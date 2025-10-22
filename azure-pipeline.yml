@@ -49,5 +49,6 @@ steps:
   displayName: 'Copy NixOS Configuration'
 
 - script: |
-    sudo nixos-rebuild switch
+    sudo systemctl start nixos-apply-config
+    echo "NixOS configuration applied successfully"
   displayName: 'Apply NixOS Configuration'

@@ -58,13 +58,11 @@
       NIX_PATH = "nixpkgs=/nix/var/nix/profiles/per-user/root/channels/nixos:nixos-config=/etc/nixos/configuration.nix";
     };
     serviceConfig = {
-      Type = "oneshot";
+      Type = "exec";
       TimeoutStartSec = "10min";
-      TimeoutStopSec = "10min";
-      KillMode = "none";
       ExecStart = "${pkgs.writeShellScript "apply-config" ''
-        ${pkgs.coreutils}/bin/cp /home/azureagent/azagent/_work/1/s/config.nix /etc/nixos/configuration.nix
-        ${config.system.build.nixos-rebuild}/bin/nixos-rebuild switch
+        set -e
+        exec ${config.system.build.nixos-rebuild}/bin/nixos-rebuild switch
       ''}";
     };
   };
