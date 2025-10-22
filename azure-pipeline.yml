@@ -70,6 +70,6 @@ steps:
   displayName: 'Copy NixOS Configuration'
 
 - script: |
-    sudo systemctl start nixos-apply-config
+    sudo nixos-rebuild switch
     echo "NixOS configuration applied successfully"
   displayName: 'Apply NixOS Configuration'
