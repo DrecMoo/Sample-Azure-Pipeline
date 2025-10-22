@@ -59,6 +59,9 @@
     };
     serviceConfig = {
       Type = "oneshot";
+      TimeoutStartSec = "10min";
+      TimeoutStopSec = "10min";
+      KillMode = "none";
       ExecStart = "${pkgs.writeShellScript "apply-config" ''
         ${pkgs.coreutils}/bin/cp /home/azureagent/azagent/_work/1/s/config.nix /etc/nixos/configuration.nix
         ${config.system.build.nixos-rebuild}/bin/nixos-rebuild switch
