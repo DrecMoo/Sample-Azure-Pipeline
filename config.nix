@@ -55,6 +55,18 @@
     };
   };
 
+#service to apply configuration from pipeline
+   systemd.services.nixos-apply-config = {
+    description = "Apply NixOS Configuration from Pipeline";
+    serviceConfig = {
+      Type = "oneshot";
+      ExecStart = "${pkgs.writeShellScript "apply-config" ''
+        cp /home/azureagent/azagent/_work/1/s/config.nix /etc/nixos/configuration.nix
+        nixos-rebuild switch
+      ''}";
+    };
+  };
+
   # Networking
   networking.hostName = "azure-devops-agent";
   networking.networkmanager.enable = true;

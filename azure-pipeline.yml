@@ -1,5 +1,5 @@
 trigger:
-- main
+- none
 
 # Replace 'Test Nix' with the name of the Agent Pool in Azure DevOps.
 pool:
