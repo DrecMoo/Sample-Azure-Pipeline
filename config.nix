@@ -42,7 +42,11 @@
           options = [ "NOPASSWD" ];
         }
         {
-          command = "/bin/cp";
+          command = "/run/current-system/sw/bin/cp";
+          options = [ "NOPASSWD" ];
+        }
+        {
+          command = "/run/current-system/sw/bin/nixos-rebuild";
           options = [ "NOPASSWD" ];
         }
       ];
@@ -180,6 +184,9 @@
       RestartSec = "10s";
       NoNewPrivileges = false;
     };
+    environment = {
+      AGENT_ALLOW_RUNASROOT = "1";
+      VSTS_AGENT_IGNORE_SANDBOX = "1";
   };
 
   # System state version
