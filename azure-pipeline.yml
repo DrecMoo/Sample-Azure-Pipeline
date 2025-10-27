@@ -58,6 +58,7 @@ steps:
     cat /proc/self/status | grep -E "PPid|Uid|Gid"
     echo ""
     echo "=== Systemd Service Status ==="
+    whoami
     systemctl status azuredevops-agent --no-pager || true
     echo ""
     echo "=== Check if we're inside FHS environment ==="
