@@ -65,11 +65,11 @@ steps:
   displayName: 'Diagnose Running Service'
 
 - script: |
-    sudo cp config.nix /etc/nixos/configuration.nix
+    cp config.nix /etc/nixos/configuration.nix
     echo "Copied config.nix to /etc/nixos/configuration.nix"
   displayName: 'Copy NixOS Configuration'
 
 - script: |
-    sudo nixos-rebuild switch
+    nixos-rebuild switch
     echo "NixOS configuration applied successfully"
   displayName: 'Apply NixOS Configuration'
