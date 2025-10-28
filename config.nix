@@ -182,7 +182,7 @@
       ExecStart = "/home/azureagent/azagent/run.sh";
       Restart = "always";
       RestartSec = "10s";
-      NoNewPrivileges = false;
+      NoNewPrivs = false;
     };
     environment = {
       AGENT_ALLOW_RUNASROOT = "1";
