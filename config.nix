@@ -91,6 +91,7 @@
     gnumake
     cmake
     icu
+    libicu
 
     dotnet-sdk_8
     nodejs_20
