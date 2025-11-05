@@ -90,7 +90,7 @@
     gcc
     gnumake
     cmake
-
+    icu
 
     dotnet-sdk_8
     nodejs_20
