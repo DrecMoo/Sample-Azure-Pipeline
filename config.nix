@@ -80,6 +80,7 @@
   # System packages needed for Azure DevOps builds
   environment.systemPackages = with pkgs; [
     # Essential tools
+    bash
     vim
     wget
     curl
