@@ -125,7 +125,7 @@
         zlib
         curl
         git
-        dotnet-sdk_8
+        #dotnet-sdk_8
         nodejs_20
       ];
       runScript = "bash";
@@ -169,6 +169,12 @@
   
   # Enable Nix flakes (optional, for modern Nix features)
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
+   nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 7d";
+  };
 
   # Azure DevOps Agent systemd service
   # NOTE: Agent as systemd service not supported according to documentation. Use run.sh
