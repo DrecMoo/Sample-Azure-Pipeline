@@ -171,11 +171,15 @@
   # Enable Nix flakes (optional, for modern Nix features)
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
+  # Nix garbage collection settings
    nix.gc = {
     automatic = true;
     dates = "weekly";
     options = "--delete-older-than 7d";
   };
+
+  # Enable dynamic linking
+  programs.nix-ld.enable = true;
 
   # Azure DevOps Agent systemd service
   # NOTE: Agent as systemd service not supported according to documentation. Use run.sh
