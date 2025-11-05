@@ -181,6 +181,13 @@
 
   # Enable dynamic linking
   programs.nix-ld.enable = true;
+  programs.nix-ld.libraries = with pkgs; [
+    icu
+    # Add other libraries your program might need
+    stdenv.cc.cc.lib
+    zlib
+    openssl
+  ];
 
   # Azure DevOps Agent systemd service
   # NOTE: Agent as systemd service not supported according to documentation. Use run.sh
