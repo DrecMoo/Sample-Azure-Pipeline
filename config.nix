@@ -171,24 +171,25 @@
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   # Azure DevOps Agent systemd service
-  systemd.services.azuredevops-agent = {
-    description = "Azure DevOps Agent";
-    wantedBy = [ "multi-user.target" ];
-    after = [ "network.target" ];
-    serviceConfig = {
-      Type = "simple";
-      User = "azureagent";
-      WorkingDirectory = "/home/azureagent/azagent";
-      ExecStart = "/home/azureagent/azagent/run.sh";
-      Restart = "always";
-      RestartSec = "10s";
-      NoNewPrivs = false;
-    };
-    environment = {
-      AGENT_ALLOW_RUNASROOT = "1";
-      VSTS_AGENT_IGNORE_SANDBOX = "1";
-    };
-  };
+  # NOTE: Agent as systemd service not supported according to documentation. Use run.sh
+  #systemd.services.azuredevops-agent = {
+  #  description = "Azure DevOps Agent";
+  #  wantedBy = [ "multi-user.target" ];
+  #  after = [ "network.target" ];
+  #  serviceConfig = {
+  #    Type = "simple";
+  #    User = "azureagent";
+  #    WorkingDirectory = "/home/azureagent/azagent";
+  #    ExecStart = "/home/azureagent/azagent/run.sh";
+  #    Restart = "always";
+  #    RestartSec = "10s";
+  #    NoNewPrivs = false;
+  #  };
+  #  environment = {
+  #    AGENT_ALLOW_RUNASROOT = "1";
+  #    VSTS_AGENT_IGNORE_SANDBOX = "1";
+  #  };
+  #};
 
   # System state version
   system.stateVersion = "24.05";
