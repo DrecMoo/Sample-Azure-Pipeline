@@ -17,13 +17,12 @@
     {
       nixosConfigurations.default = nixpkgs.lib.nixosSystem {
         specialArgs = {
-          inherit pkgs;
+          inherit inputs pkgs;
           pkgs-dotnet = nixpkgs-dotnet.legacyPackages.${system};
         };
-        extraSpecialArgs = {inherit inputs;};
         modules = [
           ./configuration.nix
-        ];      
+        ];
       };
     };
 }
