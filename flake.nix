@@ -18,7 +18,7 @@
       nixosConfigurations.default = nixpkgs.lib.nixosSystem {
         specialArgs = {
           inherit pkgs;
-          pkgs-dotnet = pkgs-dotnet;
+          pkgs-dotnet = nixpkgs-dotnet;
         };
         extraSpecialArgs = {inherit inputs;};
         modules = [
