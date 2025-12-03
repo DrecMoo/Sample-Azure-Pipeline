@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, pkgs-dotnet, ... }:
 #sudo nixos-rebuild switch
 {
   imports =
