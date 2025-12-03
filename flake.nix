@@ -7,7 +7,7 @@
 
     #Nixpkgs commit for .NET version
     nixpkgs-dotnet.url = "github:NixOS/nixpkgs/nixos-unstable";
-  }
+  };
 
   outputs = { self, nixpkgs, ...}@inputs:
     let 
