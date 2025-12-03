@@ -9,7 +9,7 @@
     nixpkgs-dotnet.url = "github:NixOS/nixpkgs/nixos-unstable";
   };
 
-  outputs = { self, nixpkgs, ...}@inputs:
+  outputs = { self, nixpkgs, nixpkgs-dotnet, ...}@inputs:
     let 
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
@@ -18,7 +18,7 @@
       nixosConfigurations.default = nixpkgs.lib.nixosSystem {
         specialArgs = {
           inherit pkgs;
-          pkgs-dotnet = nixpkgs-dotnet;
+          pkgs-dotnet = nixpkgs-dotnet.legacyPackages.${system};
         };
         extraSpecialArgs = {inherit inputs;};
         modules = [
