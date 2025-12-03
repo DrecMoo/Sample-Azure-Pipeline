@@ -4,7 +4,7 @@
   imports =
     [
       # Include hardware scan results
-      ./hardware-configuration.nix
+      /etc/nixos/hardware-configuration.nix
     ];
 
   # Boot loader configuration
@@ -93,7 +93,7 @@
     icu
   
 
-    dotnet-sdk_8
+    pkgs-dotnet.dotnet-sdk_8
     nodejs_20
     python3
 
@@ -114,6 +114,7 @@
     zip
 
     # FHS environment for Azure DevOps agent
+    # Update 11/5: This is unused
     (pkgs.buildFHSEnv {
       name = "azure-agent-env";
       targetPkgs = pkgs: with pkgs; [

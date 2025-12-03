@@ -65,11 +65,13 @@ steps:
     cat /proc/1/cmdline | tr '\0' ' ' && echo ""
   displayName: 'Diagnose Running Service'
 
+# add copies for flake.nix and flake.lock
 - script: |
-    sudo /run/current-system/sw/bin/cp config.nix /etc/nixos/configuration.nix
+    sudo /run/current-system/sw/bin/cp configuration.nix /etc/nixos/configuration.nix
     echo "Copied config.nix to /etc/nixos/configuration.nix"
   displayName: 'Copy NixOS Configuration'
 
+  # sudo /run/current-system/sw/bin/nix flake update
 - script: |
     sudo /run/current-system/sw/bin/nixos-rebuild switch
     echo "NixOS configuration applied successfully"
