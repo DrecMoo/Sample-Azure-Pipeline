@@ -113,26 +113,6 @@
     unzip
     zip
 
-    # FHS environment for Azure DevOps agent
-    # Update 11/5: This is unused
-    (pkgs.buildFHSEnv {
-      name = "azure-agent-env";
-      targetPkgs = pkgs: with pkgs; [
-        bash
-        coreutils
-        glibc
-        icu
-        krb5
-        lttng-ust
-        openssl
-        zlib
-        curl
-        git
-        #dotnet-sdk_8
-        nodejs_20
-      ];
-      runScript = "bash";
-    })
   ];
 
   # Enable XFCE Desktop Environment
