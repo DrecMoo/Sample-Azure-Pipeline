@@ -65,14 +65,14 @@ steps:
     cat /proc/1/cmdline | tr '\0' ' ' && echo ""
   displayName: 'Diagnose Running Service'
 
-# add copies for flake.nix and flake.lock
+# Optional: Update flake.lock to latest versions
+# Uncomment if you want to update dependencies on each run
 - script: |
-    sudo /run/current-system/sw/bin/cp configuration.nix /etc/nixos/configuration.nix
-    echo "Copied config.nix to /etc/nixos/configuration.nix"
-  displayName: 'Copy NixOS Configuration'
+    sudo /run/current-system/sw/bin/nix flake update
+    echo "Updated flake.lock"
+  displayName: 'Update Flake Lock'
 
-  # sudo /run/current-system/sw/bin/nix flake update
 - script: |
-    sudo /run/current-system/sw/bin/nixos-rebuild switch
-    echo "NixOS configuration applied successfully"
-  displayName: 'Apply NixOS Configuration'
+    sudo /run/current-system/sw/bin/nixos-rebuild switch --impure --flake .#default
+    echo "NixOS configuration applied successfully from flake"
+  displayName: 'Apply NixOS Configuration from Flake'
